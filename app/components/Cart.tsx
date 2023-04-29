@@ -1,4 +1,4 @@
-'use Client';
+'use client';
 
 import Image from 'next/image';
 import { useCartStore } from '@/store';
@@ -12,7 +12,7 @@ import OrderConfirmed from './OrderConfirmed';
 export default function Cart() {
   const cartStore = useCartStore();
 
-  // Total Price
+  //Total Price
   const totalPrice = cartStore.cart.reduce((acc, item) => {
     return acc + item.unit_amount! * item.quantity!;
   }, 0);
@@ -29,7 +29,7 @@ export default function Cart() {
       <motion.div
         layout
         onClick={(e) => e.stopPropagation()}
-        className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-scroll text-gray-700 w-full lg:w-2/5"
+        className="bg-base-200 absolute right-0 top-0  h-screen p-12 overflow-y-scroll  w-full lg:w-2/5"
       >
         {cartStore.onCheckout === 'cart' && (
           <button
@@ -51,15 +51,19 @@ export default function Cart() {
         {cartStore.onCheckout === 'cart' && (
           <>
             {cartStore.cart.map((item) => (
-              <motion.div layout key={item.id} className="flex py-4 gap-4">
+              <motion.div
+                layout
+                key={item.id}
+                className="flex p-4 gap-4 bg-base-100 my-4 rounded-lg "
+              >
                 <Image
-                  className="rounded-md h-24 w-24"
+                  className="rounded-md h-24"
                   src={item.image}
                   alt={item.name}
                   width={120}
                   height={120}
                 />
-                <motion.div layout>
+                <div>
                   <h2>{item.name}</h2>
                   {/* Update quantity of a product */}
                   <div className="flex gap-2">
@@ -95,29 +99,26 @@ export default function Cart() {
                   <p className="text-sm">
                     {item.unit_amount && formatPrice(item.unit_amount)}
                   </p>
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </>
         )}
-
         {/* Checkout and total */}
         {cartStore.cart.length > 0 && cartStore.onCheckout === 'cart' ? (
           <motion.div layout>
             <p>Total: {formatPrice(totalPrice)}</p>
             <button
               onClick={() => cartStore.setCheckout('checkout')}
-              className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white"
+              className="py-2 mt-4 bg-primary w-full rounded-md text-white"
             >
               Checkout
             </button>
           </motion.div>
         ) : null}
-
         {/* Checkout Form */}
         {cartStore.onCheckout === 'checkout' && <Checkout />}
         {cartStore.onCheckout === 'success' && <OrderConfirmed />}
-
         <AnimatePresence>
           {!cartStore.cart.length && cartStore.onCheckout === 'cart' && (
             <motion.div

@@ -2,7 +2,6 @@ import Stripe from 'stripe';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from './auth/[...nextauth]';
 import { getServerSession } from 'next-auth';
-import { AddCartType } from '@/types/AddCartType';
 import { prisma } from '@/util/prisma';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
@@ -30,7 +29,6 @@ export default async function handler(
   const { items, payment_intent_id } = req.body;
   const total = calculateOrderAmount(items);
   //Create the order data
-
   const orderData = {
     user: { connect: { id: userSession.user?.id } },
     amount: total,

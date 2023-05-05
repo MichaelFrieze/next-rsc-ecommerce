@@ -3,7 +3,7 @@ import { SearchParamTypes } from '@/types/SearchParamTypes';
 import formatPrice from '@/util/PriceFormat';
 import AddCart from './AddCart';
 
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 export default async function Product({ searchParams }: SearchParamTypes) {
   return (

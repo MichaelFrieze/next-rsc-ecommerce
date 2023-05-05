@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from './auth/[...nextauth]';
 
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 export default async function handler(
   req: NextApiRequest,

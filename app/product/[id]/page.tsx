@@ -3,6 +3,8 @@ import { SearchParamTypes } from '@/types/SearchParamTypes';
 import formatPrice from '@/util/PriceFormat';
 import AddCart from './AddCart';
 
+export const runtime = 'edge';
+
 export default async function Product({ searchParams }: SearchParamTypes) {
   return (
     <div className="flex flex-col 2xl:flex-row items-center justify-between gap-16 ">

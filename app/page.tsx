@@ -1,8 +1,6 @@
 import Product from './components/Product';
 import getProducts from '@/util/getProducts';
 
-export const runtime = 'edge';
-
 export default async function Home() {
   const products = await getProducts();
 
